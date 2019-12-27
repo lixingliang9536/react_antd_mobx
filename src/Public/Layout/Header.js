@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
-import { Layout, Menu } from 'antd'
+import { Layout, Menu, Button } from 'antd'
+import { withRouter } from 'react-router-dom';
 
+@withRouter
 export default class PageHeader extends Component {
   constructor(){
     super()
   }
 
+  toLink = ()=>{
+    console.log(this)
+    this.props.history.push('login')
+  }
+
   render(){
     return (
+      <div>
         <Menu
           theme="dark"
           mode="horizontal"
@@ -18,6 +26,8 @@ export default class PageHeader extends Component {
           <Menu.Item key="2">头部导航栏 2</Menu.Item>
           <Menu.Item key="3">头部导航栏 3</Menu.Item>
         </Menu>
+        <Button type='danger' className="logoutBtn" onClick={this.toLink}>注销</Button>
+      </div>
     )
   }
 }
