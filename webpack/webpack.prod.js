@@ -106,3 +106,4 @@ module.exports = merge(common, {
     hints: false
   },
 })
+console.log("------打包进行中-------")

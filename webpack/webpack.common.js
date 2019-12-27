@@ -11,6 +11,7 @@ const autoprefixer = require('autoprefixer'); //postcss-loader中的方法，用
 
 module.exports = {
   //入口文件
+  // entry:path.resolve(__dirname, '../src/index.js'),
   entry: {
     main: path.resolve(__dirname, '../src/index.js'),
     common: ['react', 'react-dom', 'react-router-dom', 'mobx']
@@ -28,6 +29,7 @@ module.exports = {
     // 自动在dist目录生成 html 并自动引入 js 文件
     new HTMLWebpackPlugin({
       template: path.resolve(__dirname, '../index.html'), //模板路径
+      favicon: path.resolve(__dirname, '../images/favicon.jpg'),  //浏览器标题上的图标
       filename: 'index.html'
     }),
 
@@ -146,9 +148,9 @@ module.exports = {
     //配置别名
     alias: {
       '@': path.resolve(__dirname,'../src'),
-      'img': path.resolve(__dirname,'../images'),
-      'utils': path.resolve(__dirname, '../src/Utils'),
-      'components': path.resolve(__dirname, '../src/Components'),
+      img: path.resolve(__dirname,'../images'),
+      utils: path.resolve(__dirname, '../src/Utils'),
+      components: path.resolve(__dirname, '../src/Components'),
     },
     //设置模块查找范围
     modules: [path.resolve(__dirname, '../node_modules')],

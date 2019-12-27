@@ -4,7 +4,6 @@ import PageHeader from './Header'
 import PageSider from './SideMenu'
 import PageContainer from './Container'
 import './index.less'
-import Router from '../Router/index'
 
 const { Header, Content, Sider } = Layout;
 
@@ -25,7 +24,7 @@ export default class WebPage extends Component {
           </Sider>
           <Content style={{background:'#fff', padding:20, margin:10,marginLeft:210}}>
             {/* 把路由匹配到的业务组件作为参数传给 PageContainer 组件使其在我们设想的位置展现 */}
-            <PageContainer router={<Router />} />
+            <PageContainer router={this.props.component} />
           </Content>
         </Layout>
       </Layout>

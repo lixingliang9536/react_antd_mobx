@@ -39,11 +39,6 @@ module.exports = merge(common, {
 
   //插件配置
   plugins: [
-    // new HTMLWebpackPlugin({
-    //   template: path.resolve(__dirname, '../index.html'),
-    //   filename: 'index.html'
-    // }),
-    // new FriendlyErrorsWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(), //启用热加载
 
     // 提取 css 文件

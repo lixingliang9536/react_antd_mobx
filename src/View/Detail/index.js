@@ -43,7 +43,7 @@ export default class Detail extends Component {
   ]
 
   clickme = ()=>{
-    console.log(this.props)
+    console.log(this)
     this.count++
     console.log(this.count)
   }
