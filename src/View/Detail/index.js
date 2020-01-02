@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import './index.less'
 import small_pic from 'img/small.jpg';
-import { Button, Table } from 'antd'
+import { Button, Table, notification } from 'antd'
 import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react'
 import Axios from 'axios';
+import Api from '@/Service/index'
 
 @observer
 export default class Detail extends Component {
@@ -48,16 +49,25 @@ export default class Detail extends Component {
     console.log(this.count)
   }
 
-  getData = ()=>{
+  getData = async ()=>{
     //根据网友提供的接口请求数据
-    Axios.get('https://5b5e71c98e9f160014b88cc9.mockapi.io/api/v1/lists').then((result)=>{
-      if(result.status == 200 && result.statusText == 'OK'){
-        console.log(result.data)
-        this.dataSource = [...result.data]
-      }
-    }).catch((err)=>{
-      console.log(err)
-    })
+    // Axios.get('https://5b5e71c98e9f160014b88cc9.mockapi.io/api/v1/lists').then((result)=>{
+    // Api.get('lists',{}).then((result)=>{
+    //   if(result.status == 200 && result.statusText == 'OK'){
+    //     this.dataSource = [...result.data]
+    //   }
+    //   console.log(result.status)
+    // }).catch((err)=>{
+    //   console.log(err)
+    // })
+    const rtnmsg = await Api.get('lists',{})
+    console.log(rtnmsg)
+    if(rtnmsg.rtncod == 'success'){
+      this.dataSource = [...rtnmsg.data]
+      notification.success({message:"服务器请求成功"})
+    }else{
+      notification.error({message:"服务器请求失败"})
+    }
   }
 
   render(){

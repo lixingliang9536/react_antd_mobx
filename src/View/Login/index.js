@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
-import {Button} from 'antd'
+import { Button, Input, Icon, Form } from 'antd'
 import { inject, observer } from 'mobx-react'
 import './index.less'
 import { withRouter } from 'react-router-dom';
+import Api from '@/Service/index'
 
+const FromCreate = Form.create;
+
+@FromCreate()
 @withRouter
 @inject('UserContent')
 @observer
@@ -12,14 +16,58 @@ export default class Login extends Component {
     super()
   }
 
-  toLogin = ()=>{
-    this.props.history.push('home')
+  toLogin = (e)=>{
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log(values)
+        localStorage.setItem("user_name",JSON.stringify(values.uname))
+        localStorage.setItem("user_pwd",JSON.stringify(values.upwd))
+        localStorage.setItem("token",JSON.stringify("4564sdsewqesadd13189"))
+        this.props.history.push('home')
+      }
+    })
   }
 
   render(){
+    const { getFieldDecorator } = this.props.form;
     return (
       <div className="loginStyle">
-        <Button type='danger' onClick={this.toLogin}>登录</Button>
+        <div className='login_contain'>
+          <div className='login_title'>
+            用户登录/LOGIN IN
+          </div>
+          <Form onSubmit={this.toLogin}>
+            <Form.Item>
+              {getFieldDecorator('uname', {
+                rules: [{ required: true, message: '用户名不可为空！' }],
+              })(
+                <Input 
+                  type='text' className='login_input'
+                  placeholder="请输入用户名"
+                  prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                />
+              )}
+            </Form.Item>
+            <Form.Item>
+            {getFieldDecorator('upwd', {
+                rules: [{ required: true, message: '密码不可为空！' }],
+              })(
+                <Input 
+                  type='password' className='login_input'
+                  placeholder="请输入密码"
+                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                />
+              )}
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary" block className='login_btn' htmlType="submit">
+                登录
+              </Button>
+            </Form.Item>
+          </Form>
+        </div>
+        {/* <Button type='danger' onClick={this.toLogin}>登录</Button> */}
       </div>
     )
   }

@@ -48,3 +48,5 @@ module.exports = merge(common, {
     })
   ],
 })
+
+console.log("process.env.NODE_ENV 的值是(webpack.dev.js)：" + process.env.NODE_ENV)

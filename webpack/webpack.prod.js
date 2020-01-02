@@ -107,3 +107,4 @@ module.exports = merge(common, {
   },
 })
 console.log("------打包进行中-------")
+console.log("process.env.NODE_ENV 的值是(webpack.product.js)："+ process.env.NODE_ENV)
