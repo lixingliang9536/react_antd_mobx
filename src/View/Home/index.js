@@ -16,6 +16,10 @@ export default class Home extends Component {
     this.bind = Bind.bind(this)
   }
 
+  componentWillMount(){
+    this.model.openMonitor && this.model.openMonitor()
+  }
+
   tolink = (path)=>{
     console.log(this.props)
     this.props.history.push(path)

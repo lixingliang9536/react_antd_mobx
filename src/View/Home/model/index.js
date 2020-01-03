@@ -1,7 +1,8 @@
 import { observable } from "mobx";
 import _descriptor from '../descriptor/index'
-// import modelWrapper from 'components/Utils/ModelWrapper'
+import modelWrapper from 'components/Utils/ModelWrapper'
 
+@modelWrapper
 export default class mHome {
 
   @observable

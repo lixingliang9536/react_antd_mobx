@@ -8,7 +8,22 @@ export default class Validator {
     //调用validator校验器的validate方法，传入需要校验的对象和校验之后的回调函数
     validator.validate(model, (errors, fields)=>{
       //这里先不对错误进行处理，将其直接暴露给外部传入的回调函数，让外部函数根据errors存在与否做出处理
-      callback(errors, fields)
+      // callback(errors, fields)
+      if(errors){
+        //给model添加 __errors__ 属性用于存储校验提示的错误
+        // Object.defineProperty(model,'__errors__',{
+        //   configurable: true,
+        //   enumerable: false,
+        //   value: {},
+        // })
+        errors.forEach(item=>{
+          console.log(item)
+          console.log(item.message)
+          console.log(item.field)
+          // model.__errors__[item.field] = item.message
+        })
+        // console.log(model)
+      }
     })
   }
 }

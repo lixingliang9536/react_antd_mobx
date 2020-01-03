@@ -16,6 +16,6 @@ export default function bind(key, ctx, model){
       model[key] = value
     }.bind(ctx),
     value: model[key],
-    help: "bind中的help"
+    help: model.__errors__ && model.__errors__[key]
   }
 }
