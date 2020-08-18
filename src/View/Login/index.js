@@ -3,7 +3,6 @@ import { Button, Input, Icon, Form } from 'antd'
 import { inject, observer } from 'mobx-react'
 import './index.less'
 import { withRouter } from 'react-router-dom';
-import Api from '@/Service/index'
 
 const FromCreate = Form.create;
 

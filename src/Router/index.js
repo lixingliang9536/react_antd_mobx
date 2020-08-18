@@ -16,6 +16,7 @@ export default class Router extends Component {
   }
 
   render(){
+    console.log(this)
     return (
       <Switch>
         <Route exact path='/' render={()=><Login />} />

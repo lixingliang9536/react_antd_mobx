@@ -3,7 +3,7 @@ import { Button, Input } from 'antd'
 import { inject, observer } from 'mobx-react'
 import './index.less'
 import small_pic from 'img/small.jpg';
-import { Bind, InputItem, Validator } from 'components/Common-Library'
+import { Bind, InputItem } from 'components/Common-Library'
 import { observable } from 'mobx';
 import mHome from './model/index'
 
@@ -16,22 +16,26 @@ export default class Home extends Component {
     this.bind = Bind.bind(this)
   }
 
+  componentDidMount(){
+    this.model.text = "text"
+  }
+
   tolink = (path)=>{
     console.log(this.props)
     this.props.history.push(path)
   }
 
-  getNewData = ()=>{
-    console.log(this.model.text)
-    Validator.validate(this.model, this.model.descriptor, (err,val)=>{
-      if(err){
-        console.log(err.async-validator)
-        return
-      }
-      console.log("-------校验通过-------")
-      this.model.text ++
-    })
-  }
+  // getNewData = ()=>{
+  //   console.log(this.model.text)
+  //   Validator.validate(this.model, this.model.descriptor, (err,val)=>{
+  //     if(err){
+  //       console.log(err.async-validator)
+  //       return
+  //     }
+  //     console.log("-------校验通过-------")
+  //     this.model.text ++
+  //   })
+  // }
 
   onAfterChange = ()=>{
     console.log("onAfterChange")
@@ -54,6 +58,7 @@ export default class Home extends Component {
         {/* <img src={small_pic} alt="" /> */}
         <Button onClick={()=>this.tolink("login")}>通过函数跳转到 Login 组件</Button>
         <InputItem InputProps={bind('text')} onAfterChange={this.onAfterChange} onBlur={this.onBlur} />
+        <InputItem InputProps={bind('opnamt')} />
         <Input size='small' maxLength={3} />
         <Button onClick={this.getNewData}>点击改变输入框的内容</Button>
       </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Input } from 'antd'
-import FormItem from './FormItem'
+import { Form, Input } from 'antd'
+
+const FormItem = Form.Item
 
 export class InputItem extends Component {
   constructor(){
