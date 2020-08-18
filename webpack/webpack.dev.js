@@ -19,12 +19,11 @@ module.exports = merge(common, {
   devServer: {
     historyApiFallback: true,
     overlay: true,        // 是否将错误展示在浏览器蒙层
-    // inline: true,
-    // stats: 'errors-only',   // 打印信息
     hot: true,
     open: false,
     host: '0.0.0.0',
     port: 9536,
+    disableHostCheck:true,
     // 设置代理
     proxy: {
       '/api': {
