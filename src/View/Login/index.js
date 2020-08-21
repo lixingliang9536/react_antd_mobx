@@ -3,6 +3,7 @@ import { Button, Input, Icon, Form } from 'antd'
 import { inject, observer } from 'mobx-react'
 import './index.less'
 import { withRouter } from 'react-router-dom';
+import logimg from 'img/logo1.png'
 
 const FromCreate = Form.create;
 
@@ -34,12 +35,15 @@ export default class Login extends Component {
       <div className="loginStyle">
         <div className='login_contain'>
           <div className='login_title'>
-            用户登录/LOGIN IN
+            <img src={logimg} alt="logo" />
+            <b>用户登录</b>
+            <span>Login</span>
           </div>
           <Form onSubmit={this.toLogin}>
             <Form.Item>
               {getFieldDecorator('uname', {
                 rules: [{ required: true, message: '用户名不可为空！' }],
+                initialValue: "admin"
               })(
                 <Input 
                   type='text' className='login_input'
@@ -51,6 +55,7 @@ export default class Login extends Component {
             <Form.Item>
             {getFieldDecorator('upwd', {
                 rules: [{ required: true, message: '密码不可为空！' }],
+                initialValue: "123456"
               })(
                 <Input 
                   type='password' className='login_input'

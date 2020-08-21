@@ -15,11 +15,11 @@ export default class WebPage extends Component {
   render(){
     return (
       <Layout style={{background:'#f5f5f5',height:'100%'}}>
-        <Header>
+        <Header className="pageHeader">
           <PageHeader />
         </Header>
         <Layout>
-          <Sider width={200} style={{background:'#fff',height: '100vh',position: 'fixed', overflow: 'auto'}}>
+          <Sider width={200} style={{height: '100vh',position: 'fixed', overflow: 'auto'}} >
             <PageSider />
           </Sider>
           <Content style={{background:'#fff', padding:20, margin:10,marginLeft:210}}>

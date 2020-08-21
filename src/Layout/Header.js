@@ -20,7 +20,7 @@ export default class PageHeader extends Component {
   render(){
     return (
       <div>
-        <Menu
+        {/* <Menu
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={['2']}
@@ -29,8 +29,8 @@ export default class PageHeader extends Component {
           <Menu.Item key="1">头部导航栏 1</Menu.Item>
           <Menu.Item key="2">头部导航栏 2</Menu.Item>
           <Menu.Item key="3">头部导航栏 3</Menu.Item>
-        </Menu>
-        <Button type='danger' className="logoutBtn" onClick={this.toLink}>注销</Button>
+        </Menu> */}
+        <Button className="logoutBtn" onClick={this.toLink}>注销</Button>
       </div>
     )
   }

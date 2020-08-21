@@ -70,6 +70,11 @@ export default class Detail extends Component {
     }
   }
 
+  pageChange = (page, pageSize)=>{
+    console.log(page)
+    console.log(pageSize)
+  }
+
   render(){
     return (
       <div>
@@ -81,7 +86,7 @@ export default class Detail extends Component {
         <Table rowKey="id" size="small"
           columns={this.dataHeader}
           dataSource={this.dataSource}
-          pagination={{hideOnSinglePage:true}}
+          pagination={{hideOnSinglePage:true,onChange:(page, pageSize)=>this.pageChange(page, pageSize)}}
         />
         <img src={small_pic} alt="" />
       </div>
