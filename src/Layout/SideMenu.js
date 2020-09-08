@@ -18,6 +18,9 @@ const menuArr=[
 export default class PageSider extends Component {
   constructor(props){
     super(props)
+    this.state = {
+      openKeys: []
+    }
   }
 
   @observable
@@ -27,18 +30,25 @@ export default class PageSider extends Component {
     this.props.history.push(key)
   }
 
+  onOpenChange = (openKeys)=>{
+    let lastKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1)
+    this.setState({
+      openKeys: lastKey ? [lastKey] : []
+    })
+  }
+
   render(){
     return (
       <Menu
         theme="dark"
         mode="inline"
-        // defaultSelectedKeys={['1']}
-        // defaultOpenKeys={['sub']}
         style={{ height: '100%', borderRight: 0, background:"#30363e" }}
         onClick={this.link}
+        openKeys={this.state.openKeys}
+        onOpenChange={this.onOpenChange}
       >
         <SubMenu
-          key='sub'
+          key='sub1'
           title={
             <span>
               <Icon type='notification' />
@@ -46,11 +56,24 @@ export default class PageSider extends Component {
             </span>
           }
         >
-          <Menu.Item key='Home'>
+          <Menu.Item key='home'>
             Home组件
           </Menu.Item>
-          <Menu.Item key='Detail'>
+          <Menu.Item key='detail'>
             Detail组件
+          </Menu.Item>
+        </SubMenu>
+        <SubMenu
+          key='sub2'
+          title={
+            <span>
+              <Icon type='notification' />
+              Antd 组件
+            </span>
+          }
+        >
+          <Menu.Item key='checkbox'>
+            Checkbox组件
           </Menu.Item>
         </SubMenu>
         {

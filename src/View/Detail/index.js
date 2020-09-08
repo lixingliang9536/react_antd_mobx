@@ -6,11 +6,15 @@ import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react'
 import Axios from 'axios';
 import Api from '@/Service/index'
+import mModel from './model/index'
+import { Bind } from 'components/Common-Library'
 
 @observer
 export default class Detail extends Component {
   constructor(){
     super()
+    this.model = new mModel()
+    this.bind = Bind.bind(this)
   }
 
   @observable

@@ -5,14 +5,14 @@ import './index.less'
 import small_pic from 'img/small.jpg';
 import { Bind, InputItem } from 'components/Common-Library'
 import { observable } from 'mobx';
-import mHome from './model/index'
+import mModel from './model/index'
 
 @inject('UserContent')
 @observer
 export default class Home extends Component {
   constructor(){
     super()
-    this.model = new mHome()
+    this.model = new mModel()
     this.bind = Bind.bind(this)
   }
 
