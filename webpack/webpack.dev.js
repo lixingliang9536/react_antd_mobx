@@ -28,7 +28,8 @@ module.exports = merge(common, {
     proxy: {
       '/api': {
         changeOrigin: true,
-        target: 'https://easy-mock.com/mock/5c2dc9665cfaa5209116fa40/example',
+        secure: false,  // target 中URL的协议为 https 时，需要设置这个参数
+        target: 'https://easy-mock.com/mock/5f587209d5906660c22dae2e/personal',
         pathRewrite: {
           '^/api/': '/'
         }
