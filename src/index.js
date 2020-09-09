@@ -6,6 +6,8 @@ import store from '@/Store/index'
 import Router from '@/Router/index'
 import './index.less'
 
+window.SUCCESS = '00000'  // 定义全局变量 用于判断请求的响应状态码
+
 ReactDom.render(
   <Provider {...store}>
     <HashRouter>

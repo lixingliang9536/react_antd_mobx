@@ -4,7 +4,6 @@ import small_pic from 'img/small.jpg';
 import { Button, Table, notification } from 'antd'
 import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react'
-import Axios from 'axios';
 import Api from '@/Service/index'
 import mModel from './model/index'
 import { Bind } from 'components/Common-Library'
@@ -43,7 +42,27 @@ export default class Detail extends Component {
       dataIndex:"sex",
       key:"sex",
       width:100,
-      sorter: (r1,r2)=>r1.sex-r2.sex,
+      render:(val,row,index)=>{
+        let lab = val
+        if(val || val === 0){
+          lab = val == 0 ? "女" : "男"
+        }
+        return lab
+      }
+    },
+    {
+      title:'生日', 
+      dataIndex:"birthday",
+      key:"birthday",
+      width:100,
+      sorter: (r1,r2)=>r1.birthday-r2.birthday,
+    },
+    {
+      title:'地址', 
+      dataIndex:"adress",
+      key:"adress",
+      width:100,
+      sorter: (r1,r2)=>r1.adress-r2.adress,
     },
   ]
 
@@ -55,22 +74,13 @@ export default class Detail extends Component {
 
   getData = async ()=>{
     //根据网友提供的接口请求数据
-    // Axios.get('https://5b5e71c98e9f160014b88cc9.mockapi.io/api/v1/lists').then((result)=>{
-    // Api.get('lists',{}).then((result)=>{
-    //   if(result.status == 200 && result.statusText == 'OK'){
-    //     this.dataSource = [...result.data]
-    //   }
-    //   console.log(result.status)
-    // }).catch((err)=>{
-    //   console.log(err)
-    // })
-    const rtnmsg = await Api.get('lists',{})
+    const rtnmsg = await Api.get('home/get_students',{})
     console.log(rtnmsg)
-    if(rtnmsg.rtncod == 'success'){
-      this.dataSource = [...rtnmsg.data]
-      notification.success({message:"服务器请求成功"})
+    if(rtnmsg.rtncod == "success"){
+      this.dataSource = [...rtnmsg.data.students]
+      notification.success({message:"学生信息请求成功！"})
     }else{
-      notification.error({message:"服务器请求失败"})
+      notification.error({message:"服务器请求失败！"})
     }
   }
 
@@ -87,7 +97,7 @@ export default class Detail extends Component {
         <Button type="danger" onClick={this.clickme}>Click me {this.count}</Button>
         <a href='#/home'>回到 Home 组件</a>
         <Button type="danger" onClick={this.getData}>发送 Axios 请求</Button>
-        <Table rowKey="id" size="small"
+        <Table rowKey="inr" size="small"
           columns={this.dataHeader}
           dataSource={this.dataSource}
           pagination={{hideOnSinglePage:true,onChange:(page, pageSize)=>this.pageChange(page, pageSize)}}

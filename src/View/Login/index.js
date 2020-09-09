@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react'
 import './index.less'
 import { withRouter } from 'react-router-dom';
 import logimg from 'img/logo1.png'
+import Api from '@/Service/index'
 
 const FromCreate = Form.create;
 
@@ -16,15 +17,19 @@ export default class Login extends Component {
     super()
   }
 
-  toLogin = (e)=>{
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+  toLogin = ()=>{
+    this.props.form.validateFields(async(err, values) => {
       if (!err) {
-        console.log(values)
-        localStorage.setItem("user_name",JSON.stringify(values.uname))
-        localStorage.setItem("user_pwd",JSON.stringify(values.upwd))
-        localStorage.setItem("token",JSON.stringify("4564sdsewqesadd13189"))
-        this.props.history.push('home')
+        let uname = values.uname
+        let upwd = values.upwd
+        const rtnmsg = await Api.post("login",{uname, upwd})
+        if(rtnmsg.rtncod == "success"){
+          localStorage.setItem("user_name",JSON.stringify(rtnmsg.data.uname))
+          localStorage.setItem("token",JSON.stringify(rtnmsg.data.token))
+          this.props.history.push('home')
+        }else{
+          console.log("登录失败，请重试！")
+        }
       }
     })
   }
@@ -71,7 +76,6 @@ export default class Login extends Component {
             </Form.Item>
           </Form>
         </div>
-        {/* <Button type='danger' onClick={this.toLogin}>登录</Button> */}
       </div>
     )
   }
